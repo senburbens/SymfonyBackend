@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity("email")
+ * @UniqueEntity("login")
  * @Table(name="utilisateur")
  * @ApiResource(
  *    normalizationContext={"groups"={"user:read"}},
@@ -158,7 +158,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->login;
     }
 
     /**
