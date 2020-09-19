@@ -48,6 +48,14 @@ class User implements UserInterface
      */
     private $email;
 
+
+    /**
+     * 
+     */
+    //@ORM\Column(type="json") A mettre apres les etoiles pour corriger l'anotation Doctrine
+    private $roles = [];
+    
+
     /**
      * @Column(name="nom_utilisateur")
      * @ORM\Column(type="string")
@@ -115,6 +123,7 @@ class User implements UserInterface
     }
 
 
+
     // Getter et Setter pour le prenom de l'utilisateur
     public function getPrenom(): ?string
     {
@@ -161,11 +170,6 @@ class User implements UserInterface
         return (string) $this->login;
     }
 
-    /**
-     * 
-    */
-    //@ORM\Column(type="json") A mettre apres les etoiles pour corriger l'anotation Doctrine
-    private $roles = [];
 
     /**
      * @see UserInterface
