@@ -32,6 +32,10 @@ final class SwaggerDecorator implements NormalizerInterface
                     'type' => 'string',
                     'readOnly' => true,
                 ],
+                'refresh_token' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
             ],
         ];
 
@@ -72,7 +76,7 @@ final class SwaggerDecorator implements NormalizerInterface
                                 'content' => [
                                     'application/json' => [
                                         'schema' => [
-                                            '$ref' => '#/components/schemas/Token',
+                                            '$ref' => '#/components/schemas/Token',                                            
                                         ],
                                     ],
                                 ],
