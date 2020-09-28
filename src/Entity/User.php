@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Groupe;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -48,13 +51,29 @@ class User implements UserInterface
      */
     private $email;
 
-
     /**
      * 
      */
-    //@ORM\Column(type="json") A mettre apres les etoiles pour corriger l'anotation Doctrine
+    //@ORM\Column(type="json")
     private $roles = [];
-    
+
+    /**
+     *  @Groups({"user:read"})
+     *  @ManyToOne(targetEntity=Groupe::class, inversedBy="users")
+     *  @JoinColumn(name="id_groupe", referencedColumnName="id_groupe")
+    */
+    private $groupe;
+
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(Groupe $groupe)
+    {
+        $this->groupe = $groupe;
+    }        
 
     /**
      * @Column(name="nom_utilisateur")
@@ -92,6 +111,12 @@ class User implements UserInterface
      * @SerializedName("password")
     */
     private $plainPassword;
+
+
+    public function __construct()
+    {
+        // $this->roles = new ArrayCollection();
+    }
     
 
 
@@ -179,16 +204,17 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_' . strtoupper( $this->getGroupe()->getLibelle());
 
         return array_unique($roles);
     } 
 
-    public function setRoles(array $roles): self
+/*     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
-    }
+    } */
 
     /**
      * @see UserInterface
