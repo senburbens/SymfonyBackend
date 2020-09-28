@@ -33,12 +33,14 @@ class JWTCreatedListener
         $payload = $event->getData();
         $payload['ip'] = $request->getClientIp();
 
+        // $expiration = new \DateTime('+1 day');
+        // $expiration->setTime(2, 0, 0);
+        // $payload['exp'] = $expiration->getTimestamp();
 
         $event->setData($payload);
         
         //$header = $event->getHeader();
         //$header['cty'] = 'JWT';
-
         //$event->setHeader($header);
     }
 }

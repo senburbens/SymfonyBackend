@@ -60,7 +60,6 @@ class Groupe
     public function setLibelle(?string $libelle): self
     {
         $this->libelle = $libelle;
-
         return $this;
     }
 
@@ -72,7 +71,6 @@ class Groupe
     public function setStatut(?string $statut): self
     {
         $this->statut = $statut;
-
         return $this;
     }
 
