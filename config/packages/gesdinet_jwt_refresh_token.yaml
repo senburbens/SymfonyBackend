@@ -1,3 +1,5 @@
 gesdinet_jwt_refresh_token :
   ttl : 2592000
   user_identity_field : login
+  #user_provider: security.user.provider.concrete.<your provider defined in security.yaml>
+  user_provider: security.user.provider.concrete.app_user_provider

@@ -2,8 +2,8 @@
 
 namespace App\EventListener;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 
 class JWTCreatedListener
@@ -32,6 +32,7 @@ class JWTCreatedListener
 
         $payload = $event->getData();
         $payload['ip'] = $request->getClientIp();
+
 
         // $expiration = new \DateTime('+1 day');
         // $expiration->setTime(2, 0, 0);
