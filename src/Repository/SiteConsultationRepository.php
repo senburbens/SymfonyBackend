@@ -47,4 +47,25 @@ class SiteConsultationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOneByCode($value): ?SiteConsultation
+    {
+        $results =  $this->createQueryBuilder('sc')
+        ->andWhere('sc.code = :val')
+        ->setParameter('val', $value)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+        return $results;
+    }    
+
+    public function testQuery($value) : ?SiteConsultation
+    {
+        $sql = "SELECT sc FROM App:SiteConsultation sc WHERE sc.code = :code";
+        $results = $this->getEntityManager()
+                        ->createQuery($sql)
+                        ->setParameter('code', $value)
+                        ->getResult();
+        return $results;
+    }
 }
