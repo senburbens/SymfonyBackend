@@ -39,7 +39,6 @@ class SiteType
     /**
      * @ORM\OneToMany(targetEntity=SiteConsultation::class, mappedBy="type")
      * @JoinColumn(name="id", referencedColumnName="type")
-     * @Groups("sitetype:read")
      */
     private $siteConsultations;
 

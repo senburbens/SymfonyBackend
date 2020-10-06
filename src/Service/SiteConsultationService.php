@@ -20,4 +20,9 @@ class SiteConsultationService
     {
         return $this->siteConsultationRepository->findOneByCode($value);
     }  
+
+    public function findAll()
+    {
+        return $this->siteConsultationRepository->testQuery2();
+    }
 }

@@ -12,30 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/test", name="test")
-     */
-    public function index()
-    {
-        return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
-        ]);
-    }
-
-
-    /**
      * @Route("/api/test", name="test")
     */
-    public function index2(SiteConsultationService $siteConsultationService)
+    public function index(SiteConsultationService $siteConsultationService)
     {
-        $siteConsultation = $siteConsultationService->findOneByCode("prescription");
+        //$siteConsultation = $siteConsultationService->findOneByCode("spo2");
+        $siteConsultationAll = $siteConsultationService->findAll();
 
-        $data = [
-            'name' => 'iPhone X',
-            'price' => 1000
-        ];
-
-        //return new JsonResponse(json_encode($siteConsultation));
-        return $this->json($siteConsultation);
+        return $this->json($siteConsultationAll);
     }
 
 

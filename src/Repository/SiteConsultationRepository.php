@@ -14,6 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SiteConsultationRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SiteConsultation::class);
@@ -59,13 +60,30 @@ class SiteConsultationRepository extends ServiceEntityRepository
         return $results;
     }    
 
-    public function testQuery($value) : ?SiteConsultation
+    public function testQuery($code) : ?SiteConsultation
     {
         $sql = "SELECT sc FROM App:SiteConsultation sc WHERE sc.code = :code";
         $results = $this->getEntityManager()
                         ->createQuery($sql)
-                        ->setParameter('code', $value)
+                        ->setParameter('code', $code)
                         ->getResult();
         return $results;
+    }
+
+
+    public function testQuery2()
+    {
+        $result = $this->findBy(
+                            array(),    // $where 
+                            array(),    // $orderBy
+                            41,         // $limit
+                            0           // $offset
+                        );
+        return $result;
+    }
+
+    public function testQuery3(){
+        return $this->getEntityManager()->createQuery('SELECT u FROM App:SiteConsultation u')
+        ->getResult();
     }
 }
